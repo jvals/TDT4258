@@ -1,4 +1,4 @@
-# TDT4258_Github
+# TDT4258
 This repository will contain the exercises in TDT4258, Fall 2015.
 
 Team: Janusa, Bjarte and Jørgen
