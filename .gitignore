@@ -100,4 +100,37 @@ tramp
 .cask/
 
 
+*.zip
+*.swp
+*.swo
+*.un~
+*.s~
+*.c~
+.DS_Store
+*.pyc
+*.py~
+*.gdb
+# emacs buffers
+.#*
+*.*#
+
+
+*.o
+*.elf
+*.bin
+*.hex
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+
+*.lock
+
+
 
