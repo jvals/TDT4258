@@ -51,7 +51,7 @@ _reset:
 	//read status of pins 0-7 from GPIO_PC_DIN
 	ldr R0, =GPIO_PA_BASE
 	ldr R4, =GPIO_PC_BASE
-	orr R5, R4, 0b1010101010101010
+	ldr R5, [R4, #GPIO_DIN]
 	STR R5, [R0, #GPIO_DOUT]
 
 cmu_base_addr:
