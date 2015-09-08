@@ -35,8 +35,7 @@ _reset:
 	STR R1, [R0,#GPIO_MODEH]
 
 	// Test LEDs
-	ldr R1, =0b0000000011111111
-	//ldr R1, =0b1111111100000000 
+	ldr R1, =0b0000000011111111 
 	str R1, [R0,#GPIO_DOUT]
 
 	// Set pins 0-7 to input by writing 0x33333333
@@ -52,7 +51,9 @@ _reset:
 	ldr R0, =GPIO_PA_BASE
 	ldr R4, =GPIO_PC_BASE
 	ldr R5, [R4, #GPIO_DIN]
+	lsl R5, R5, #8
 	STR R5, [R0, #GPIO_DOUT]
+
 
 cmu_base_addr:
 			.long CMU_BASE
