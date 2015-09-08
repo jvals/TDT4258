@@ -35,8 +35,24 @@ _reset:
 	STR R1, [R0,#GPIO_MODEH]
 
 	// Test LEDs
-	ldr R1, =0b0111000011110000
+	ldr R1, =0b0000000011111111
+	//ldr R1, =0b1111111100000000 
 	str R1, [R0,#GPIO_DOUT]
+
+	// Set pins 0-7 to input by writing 0x33333333
+	ldr R0, =GPIO_PC_BASE
+	ldr R1, =0x33333333
+	STR R1, [R0, #GPIO_MODEL]
+
+	// Enable internal pull-up by writing 0xff
+	ldr R3, =0xff
+	STR R3, [R0, #GPIO_DOUT]
+
+	//read status of pins 0-7 from GPIO_PC_DIN
+	ldr R0, =GPIO_PA_BASE
+	ldr R4, =GPIO_PC_BASE
+	orr R5, R4, 0b1010101010101010
+	STR R5, [R0, #GPIO_DOUT]
 
 cmu_base_addr:
 			.long CMU_BASE
