@@ -52,6 +52,12 @@ _reset:
 	ldr R1, =0x22222222
 	str R1, [R0, #GPIO_EXTIPSELL]
 
+	// Enable EXTIRISE, EXTIFALL and IEN
+	str R3, [R0, #GPIO_EXTIRISE]
+	str R3, [R0, #GPIO_EXTIFALL]
+	str R3, [R0, #GPIO_IEN]
+	
+
 	
 start:	//read status of pins 0-7 from GPIO_PC_DIN
 	ldr R0, =GPIO_PA_BASE
