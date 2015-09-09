@@ -46,6 +46,12 @@ _reset:
 	// Enable internal pull-up by writing 0xff
 	ldr R3, =0xff
 	STR R3, [R0, #GPIO_DOUT]
+
+	// Enable GPIO EXTIPSELL
+	ldr R0, =GPIO_BASE
+	ldr R1, =0x22222222
+	str R1, [R0, #GPIO_EXTIPSELL]
+
 	
 start:	//read status of pins 0-7 from GPIO_PC_DIN
 	ldr R0, =GPIO_PA_BASE
