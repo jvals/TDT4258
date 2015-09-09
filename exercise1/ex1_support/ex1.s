@@ -46,15 +46,18 @@ _reset:
 	// Enable internal pull-up by writing 0xff
 	ldr R3, =0xff
 	STR R3, [R0, #GPIO_DOUT]
-
-	//read status of pins 0-7 from GPIO_PC_DIN
+	
+start:	//read status of pins 0-7 from GPIO_PC_DIN
 	ldr R0, =GPIO_PA_BASE
 	ldr R4, =GPIO_PC_BASE
 	ldr R5, [R4, #GPIO_DIN]
 	lsl R5, R5, #8
 	STR R5, [R0, #GPIO_DOUT]
+	
+	b start
 
-
+	
+	
 cmu_base_addr:
 			.long CMU_BASE
 	
