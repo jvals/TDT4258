@@ -56,9 +56,15 @@ _reset:
 	str R3, [R0, #GPIO_EXTIRISE]
 	str R3, [R0, #GPIO_EXTIFALL]
 	str R3, [R0, #GPIO_IEN]
-	
 
-	
+	// NVIC (Nested Vectored Interrupt Controller)
+	ldr R0, =0x802
+	ldr R1, =ISER0
+	str R0, [R1]
+
+	b main
+
+/*	
 start:	//read status of pins 0-7 from GPIO_PC_DIN
 	ldr R0, =GPIO_PA_BASE
 	ldr R4, =GPIO_PC_BASE
@@ -67,12 +73,19 @@ start:	//read status of pins 0-7 from GPIO_PC_DIN
 	STR R5, [R0, #GPIO_DOUT]
 	
 	b start
-
+*/
 	
 	
 cmu_base_addr:
 			.long CMU_BASE
-	
+
+
+	.thumb_func
+main:	
+	ldr R0, =0b0110
+	ldr R1, =SCR
+	str R0, [R1]
+	WFI
 	/////////////////////////////////////////////////////////////////////////////
 	//
   // GPIO handler
@@ -81,9 +94,20 @@ cmu_base_addr:
 	/////////////////////////////////////////////////////////////////////////////
 
         .thumb_func
-gpio_handler:  
-
-	      b .  // do nothing
+gpio_handler:
+	// Clear interrupt
+	ldr R0, =GPIO_BASE
+	ldr R1, [R0, #GPIO_IF]
+	str R1, [R0, #GPIO_IFC]
+	
+	//read status of pins 0-7 from GPIO_PC_DIN
+	ldr R0, =GPIO_PA_BASE
+	ldr R4, =GPIO_PC_BASE
+	ldr R5, [R4, #GPIO_DIN]
+	lsl R5, R5, #8
+	STR R5, [R0, #GPIO_DOUT]
+	bx lr
+	      
 	
 	/////////////////////////////////////////////////////////////////////////////
 	
