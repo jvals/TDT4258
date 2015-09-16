@@ -62,6 +62,13 @@ _reset:
 	ldr R1, =ISER0
 	str R0, [R1]
 
+	// Turn off SRAM
+	ldr R0, =0x7
+	ldr R1, =EMU_BASE
+	str R0, [R1, #0x004] // 0x004 is emu_memctrl
+
+	
+
 	b main
 
 /*	
