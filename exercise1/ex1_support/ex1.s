@@ -67,6 +67,11 @@ _reset:
 	ldr R1, =EMU_BASE
 	str R0, [R1, #0x004] // 0x004 is emu_memctrl
 
+	// Disable LFACLK and LFBCLK
+	ldr R0, =0x1
+	lsl R0, #0x10
+	ldr R1, =CMU_BASE
+	str R0, [R1, #0x028] // 0x028 is CMU_LFCLKSEL
 	
 
 	b main
@@ -87,9 +92,10 @@ cmu_base_addr:
 			.long CMU_BASE
 
 
-	.thumb_func
-main:	
-	ldr R0, =0b0110
+	
+main:
+	// Set SleepOnExit and SleepDeep
+	ldr R0, =0b110
 	ldr R1, =SCR
 	str R0, [R1]
 	WFI
