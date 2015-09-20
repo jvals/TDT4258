@@ -80,3 +80,5 @@
 
         SCR = 0xe000ed10
 
+	// Memory System Controller
+	MSC_BASE = 0x400C0000
