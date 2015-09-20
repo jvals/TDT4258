@@ -72,7 +72,11 @@ _reset:
 	lsl R0, #0x10
 	ldr R1, =CMU_BASE
 	str R0, [R1, #0x028] // 0x028 is CMU_LFCLKSEL
-	
+
+	// Disable Cache
+	ldr R0, =MSC_BASE
+	ldr R1, =0b1001000
+	str R1, [R0, #0x004] // 0x004 is MSC_READCTRL
 	
 	b main
 
@@ -89,19 +93,6 @@ main:
 	ldr R1, =SCR
 	str R0, [R1]
 	WFI
-
-	
-/*
-start:	//read status of pins 0-7 from GPIO_PC_DIN
-	ldr R0, =GPIO_PA_BASE
-	ldr R4, =GPIO_PC_BASE
-	ldr R5, [R4, #GPIO_DIN]
-	lsl R5, R5, #8
-	STR R5, [R0, #GPIO_DOUT]
-	
-	b start
-*/
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
