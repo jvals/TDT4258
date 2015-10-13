@@ -24,6 +24,8 @@ int main(void)
   setupGPIO();
   setupDAC();
   setupTimer(SAMPLE_PERIOD);
+
+  
   
   /* Enable interrupt handling */
   setupNVIC();
