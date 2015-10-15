@@ -26,4 +26,10 @@ upload :
 
 .PHONY : clean
 clean :
-	-rm -rf *.o *.elf *.bin *.hex 
+	-rm -rf *.o *.elf *.bin *.hex
+
+.PHONY : all
+all :
+	clear
+	make
+	make upload

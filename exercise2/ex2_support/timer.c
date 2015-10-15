@@ -22,6 +22,8 @@ void setupTimer(uint16_t period)
 
     *TIMER1_TOP = 14000000/period;
 
+    //*TIMER1_TOP = 10;
+
     *TIMER1_IEN = 1;
 
     *TIMER1_CMD = 1;

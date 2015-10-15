@@ -6,7 +6,6 @@
 #define GPIO_PB_BASE 0x40006024
 #define GPIO_PC_BASE 0x40006048
 #define GPIO_BASE 0x40006100
-#define GPIO_IF 0x14
 
 #define GPIO_PA_CTRL     ((volatile uint32_t*)(GPIO_PA_BASE + 0x00))
 #define GPIO_PA_MODEL    ((volatile uint32_t*)(GPIO_PA_BASE + 0x04))
@@ -65,6 +64,7 @@
 
 #define TIMER1_BASE 0x40010400
 
+#define TIMER1_CTRL ((volatile uint32_t*)(TIMER1_BASE + 0x00))
 #define TIMER1_CMD ((volatile uint32_t*)(TIMER1_BASE + 0x04))
 #define TIMER1_IEN ((volatile uint32_t*)(TIMER1_BASE + 0x0c))
 #define TIMER1_IFC ((volatile uint32_t*)(TIMER1_BASE + 0x18))
