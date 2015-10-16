@@ -28,12 +28,18 @@
 #define gSH 830
 #define aH 880
 
+
+/* Declarations */
 void GPIO_Buttons();
 void playSound(int change);
-int mapInputToButton();
 void sawtoothWave(int note, int time);
+int mapInputToButton();
 
 volatile int lastButtonActive = -1;
+volatile int duration = 0;
+volatile int counter = 0;
+volatile int i = 0;
+bool iterate=false; 
 
 /* TIMER1 interrupt handler */
 void __attribute__ ((interrupt)) TIMER1_IRQHandler() {  
@@ -83,12 +89,16 @@ void playSound(int change) {
     return;
   }
 
-  *DAC0_CH0DATA += change;
-  *DAC0_CH1DATA += change;
 
-  if(*DAC0_CH0DATA >= change*3) {
+  i += 4000/change;
+
+  *DAC0_CH0DATA = i;
+  *DAC0_CH1DATA = i;
+
+  if(*DAC0_CH1DATA > change*1.5) {
     *DAC0_CH0DATA = 0;
     *DAC0_CH1DATA = 0;
+    i = 0;
   }
 
 
@@ -107,11 +117,11 @@ int mapInputToButton() {
 
     default : break;
   }
-  return lastButtonActive;
+  return 0;
 
 }
 
-/*void sawtoothWave(int note, int time){
+void sawtoothWave(int note, int time){
 
     int sampling=PERIOD/note;
     
@@ -133,4 +143,4 @@ int mapInputToButton() {
        iterate=true;
        counter=0;
     }
-}*/
+}
