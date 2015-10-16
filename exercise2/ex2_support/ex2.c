@@ -3,6 +3,7 @@
 #include <math.h>
 
 #include "efm32gg.h"
+#include "music_theory.c"
 
 /* 
   TODO calculate the appropriate sample period for the sound wave(s) 
@@ -10,8 +11,7 @@
   from) runs at 14 MHz by default. Also remember that the timer counter
   registers are 16 bits.
 */
-/* The period between sound samples, in clock cycles */
-#define   SAMPLE_PERIOD   318
+
 
 
 
