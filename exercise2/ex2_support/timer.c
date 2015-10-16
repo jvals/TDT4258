@@ -20,8 +20,14 @@ void setupTimer(uint16_t period)
 
     *CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_TIMER1;
 
-    *TIMER1_TOP = 14000000/period;
-
+    *TIMER1_TOP = 1400000000/period;
+	
+	//*TIMER1_TOP = 100000;
+	
+	
+	//*TIMER1_CTRL |= (10 << 24);
+	
+	
     //*TIMER1_TOP = 10;
 
     *TIMER1_IEN = 1;
