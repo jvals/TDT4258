@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include "efm32gg.h"
+#include "music_theory.h"
 
 /* function to setup the timer */
 void setupTimer(uint16_t period)
@@ -36,6 +37,9 @@ void startTimer() {
 }
 
 void stopTimer() {
+    i = 0;
+    counter = 0;
+    note_counter = 0;
     *TIMER1_CMD = 0;
 }
 

@@ -6,6 +6,7 @@
 #include "efm32gg.h"
 #include "music_theory.h"
 #include "timer.h"
+#include "dac.h"
 
 #define PI 3.14159
 #define PERIOD 318
@@ -52,10 +53,8 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler() {
   }
 
   if(note_counter >= (*current_song).length) {
-    //stopTimer();
-    i = 0;
-    counter = 0;
-    note_counter = 0;
+    stopTimer();
+    disableDAC();
     return;
   }
 
@@ -64,19 +63,9 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler() {
   setDACDATA(n, offset);
   i++;
 
-  switch(lastButtonActive) {
-  case(0) : break;
-  case(1) : playSong(&TEST, 0xff); break;
-  case(2) : playSound(/*128*2*/ d   ); break;
-  case(3) : playSound(/*128*3*/ e   ); break;
-  case(4) : playSound(/*128*4*/ f   ); break;
-  case(5) : playSound(/*128*5*/ g   ); break;
-  case(6) : playSound(/*128*6*/ gS  ); break;
-  case(7) : playSound(/*128*7*/ a   ); break;
-  case(8) : playSound(/*128*8*/ -1   ); break;
-  default : break;
-  }
+
 }
+
 
 /* GPIO even pin interrupt handler */
 void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler() 
@@ -92,16 +81,32 @@ void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
 
 
 void GPIO_Buttons() {
-    *GPIO_IFC = 0xff;
-    *GPIO_PA_DOUT = (*GPIO_PC_DIN) << 8;
-    lastButtonActive = mapInputToButton();
-    
+  *GPIO_IFC = 0xff;
+  *GPIO_PA_DOUT = (*GPIO_PC_DIN) << 8;
+  lastButtonActive = mapInputToButton();
+
+  switch(lastButtonActive) {
+  case(0) : break;
+  case(1) : playSong(&TEST, 0xfff); break;
+  case(2) : playSound(/*128*2*/ d   ); break;
+  case(3) : playSound(/*128*3*/ e   ); break;
+  case(4) : playSound(/*128*4*/ f   ); break;
+  case(5) : playSound(/*128*5*/ g   ); break;
+  case(6) : playSound(/*128*6*/ gS  ); break;
+  case(7) : playSound(/*128*7*/ a   ); break;
+  case(8) : playSound(/*128*8*/ -1   ); break;
+  default : break;
+  }
+
+  
 }
 
 
 
 void playSound(int change) {
   if(change == -1) {
+    stopTimer();
+    disableDAC();
     *DAC0_CH0DATA = 0;
     *DAC0_CH1DATA = 0;
     return;
