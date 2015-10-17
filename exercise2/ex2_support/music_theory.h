@@ -22,4 +22,9 @@ extern uint16_t note_counter;
 extern uint16_t i;
 
 extern Note A3;
+extern Note A32;
+extern Note A4;
 extern Song TEST;
+extern Song TEST2;
+extern Song TEST3;
+extern Song TEST4;

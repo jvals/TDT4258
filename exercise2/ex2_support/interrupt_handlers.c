@@ -88,9 +88,9 @@ void GPIO_Buttons() {
   switch(lastButtonActive) {
   case(0) : break;
   case(1) : playSong(&TEST, 0xfff); break;
-  case(2) : playSound(/*128*2*/ d   ); break;
-  case(3) : playSound(/*128*3*/ e   ); break;
-  case(4) : playSound(/*128*4*/ f   ); break;
+  case(2) : playSong(&TEST2,0xfff); break;
+  case(3) : playSong(&TEST3,0xfff); break;
+  case(4) : playSong(&TEST4,0xfff); break;
   case(5) : playSound(/*128*5*/ g   ); break;
   case(6) : playSound(/*128*6*/ gS  ); break;
   case(7) : playSound(/*128*7*/ a   ); break;
