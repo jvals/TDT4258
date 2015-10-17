@@ -11,7 +11,7 @@ typedef struct Song{
 	Note* notes[];
 } Song;
 
-
+void setDACDATA(Note*, int);
 void playSong(Song* song, uint16_t note_length);
 
 
@@ -19,6 +19,7 @@ extern Song* current_song;
 extern uint16_t current_note_length;
 extern uint16_t counter;
 extern uint16_t note_counter;
+extern uint16_t i;
 
 extern Note A3;
 extern Song TEST;

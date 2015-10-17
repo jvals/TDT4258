@@ -51,9 +51,22 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler() {
     counter++;
   }
 
+  if(note_counter >= (*current_song).length) {
+    //stopTimer();
+    i = 0;
+    counter = 0;
+    note_counter = 0;
+    return;
+  }
+
+  Note* n = (*current_song).notes[note_counter];
+  int offset = (i % (*n).number);
+  setDACDATA(n, offset);
+  i++;
+
   switch(lastButtonActive) {
   case(0) : break;
-  case(1) : playSound(/*128*1*/ c   ); break;
+  case(1) : playSong(&TEST, 0xff); break;
   case(2) : playSound(/*128*2*/ d   ); break;
   case(3) : playSound(/*128*3*/ e   ); break;
   case(4) : playSound(/*128*4*/ f   ); break;
@@ -108,6 +121,6 @@ int mapInputToButton() {
 
     default : break;
   }
-  return lastButtonActive;
+  return 0;
 
 }
