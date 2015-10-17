@@ -27,14 +27,16 @@ void setupTimer(uint16_t period)
     *TIMER1_CMD = 1;
 
 
-    void startTimer() {
-        *TIMER1_CMD = 1;
-    }
 
-    void stopTimer() {
-        *TIMER1_CMD = 0;
-    }
 	
+}
+
+void startTimer() {
+    *TIMER1_CMD = 1;
+}
+
+void stopTimer() {
+    *TIMER1_CMD = 0;
 }
 
 

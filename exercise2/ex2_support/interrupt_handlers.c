@@ -4,6 +4,8 @@
 #include <math.h>
 
 #include "efm32gg.h"
+#include "music_theory.h"
+#include "timer.h"
 
 #define PI 3.14159
 #define PERIOD 318
@@ -36,15 +38,19 @@ void sawtoothWave(int note, int time);
 int mapInputToButton();
 
 volatile int lastButtonActive = -1;
-volatile int duration = 0;
-volatile int counter = 0;
-volatile int i = 0;
-bool iterate=false; 
 
 /* TIMER1 interrupt handler */
 void __attribute__ ((interrupt)) TIMER1_IRQHandler() {  
   //Clear handler
   *TIMER1_IFC = 1;
+
+  if (counter >= current_note_length) {
+    counter = 0;
+    note_counter++;
+  } else {
+    counter++;
+  }
+
   switch(lastButtonActive) {
   case(0) : break;
   case(1) : playSound(/*128*1*/ c   ); break;
@@ -82,26 +88,11 @@ void GPIO_Buttons() {
 
 
 void playSound(int change) {
-
   if(change == -1) {
     *DAC0_CH0DATA = 0;
     *DAC0_CH1DATA = 0;
     return;
   }
-
-
-  i += 4000/change;
-
-  *DAC0_CH0DATA = i;
-  *DAC0_CH1DATA = i;
-
-  if(*DAC0_CH1DATA > change*1.5) {
-    *DAC0_CH0DATA = 0;
-    *DAC0_CH1DATA = 0;
-    i = 0;
-  }
-
-
 }
 
 int mapInputToButton() {
@@ -117,30 +108,6 @@ int mapInputToButton() {
 
     default : break;
   }
-  return 0;
+  return lastButtonActive;
 
-}
-
-void sawtoothWave(int note, int time){
-
-    int sampling=PERIOD/note;
-    
-    int slope = (1024)/sampling;
-    
-    int y = (slope*duration);
-    
-    *DAC0_CH0DATA=y;
-    *DAC0_CH1DATA=y;
-    
-    duration++;
-
-    if(duration>=sampling){
-      duration=0;
-    }
-    counter++;
-    
-    if(counter==time){
-       iterate=true;
-       counter=0;
-    }
 }
