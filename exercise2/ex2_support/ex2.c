@@ -29,7 +29,6 @@ int main(void)
   /* Call the peripheral setup functions */
   setupGPIO();
   setupDAC();
-  //setupTimer(SAMPLE_PERIOD);
   setupLETimer(SAMPLE_PERIOD);
 
   /* Enable interrupt handling */
@@ -58,10 +57,6 @@ void setupNVIC()
      You will need TIMER1, GPIO odd and GPIO even interrupt handling for this
      assignment.
   */
-
-     
-     //*ISER0 = 0x1802;
-
      // GPIO EVEN
      *ISER0 |= 1 << 1;
 

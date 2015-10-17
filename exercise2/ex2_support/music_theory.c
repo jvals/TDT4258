@@ -22,9 +22,8 @@ void setDACDATA(Note* n, int offset) {
 
 void playSong(Song* song, uint16_t note_length) {
 	setCurrentSong(song, note_length);
-	//startTimer();
-	startLETimer();
 	setupDAC();
+	startLETimer();
 }
 
 

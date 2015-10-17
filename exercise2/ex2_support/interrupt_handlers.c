@@ -43,8 +43,7 @@ volatile int lastButtonActive = -1;
 
 /* TIMER1 interrupt handler */
 void __attribute__ ((interrupt)) LETIMER0_IRQHandler() {  
-  //Clear handler
-  *TIMER1_IFC = 1;
+
 
   if (counter >= current_note_length) {
     counter = 0;
@@ -54,7 +53,6 @@ void __attribute__ ((interrupt)) LETIMER0_IRQHandler() {
   }
 
   if(note_counter >= (*current_song).length) {
-    //stopTimer();
     stopLETimer();
     disableDAC();
     return;
@@ -64,8 +62,6 @@ void __attribute__ ((interrupt)) LETIMER0_IRQHandler() {
   int offset = (i % (*n).number);
   setDACDATA(n, offset);
   i++;
-
-
 }
 
 
@@ -98,16 +94,13 @@ void GPIO_Buttons() {
   case(7) : playSound(/*128*7*/ a   ); break;
   case(8) : playSound(/*128*8*/ -1   ); break;
   default : break;
-  }
-
-  
+  }  
 }
 
 
 
 void playSound(int change) {
   if(change == -1) {
-    //stopTimer();
     stopLETimer();
     disableDAC();
     *DAC0_CH0DATA = 0;

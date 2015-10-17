@@ -35,10 +35,14 @@ void setupLETimer(uint16_t period) {
 	// Start the LETIMER
 	*LETIMER0_CMD |= (1<<0);
 
+	// Enable interrupt generation
+	*LETIMER0_IEN |= (1 <<2);
+
 }
 
 void startLETimer() {
 	*LETIMER0_CMD |= (1<<0);
+	*CMU_OSCENCMD |= (1<<8);
 }
 
 void stopLETimer() {
@@ -46,4 +50,7 @@ void stopLETimer() {
     counter = 0;
     note_counter = 0;
 	*LETIMER0_CMD |= (1<<1);
+	*CMU_OSCENCMD |= (1<<9);
+	*LETIMER0_IFC |= (1 << 2);
+
 }
