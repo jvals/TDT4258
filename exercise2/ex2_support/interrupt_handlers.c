@@ -7,6 +7,7 @@
 #include "music_theory.h"
 #include "timer.h"
 #include "dac.h"
+#include "LETimer.h"
 
 #define PI 3.14159
 #define PERIOD 318
@@ -41,7 +42,7 @@ int mapInputToButton();
 volatile int lastButtonActive = -1;
 
 /* TIMER1 interrupt handler */
-void __attribute__ ((interrupt)) TIMER1_IRQHandler() {  
+void __attribute__ ((interrupt)) LETIMER0_IRQHandler() {  
   //Clear handler
   *TIMER1_IFC = 1;
 
@@ -53,7 +54,8 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler() {
   }
 
   if(note_counter >= (*current_song).length) {
-    stopTimer();
+    //stopTimer();
+    stopLETimer();
     disableDAC();
     return;
   }
@@ -105,7 +107,8 @@ void GPIO_Buttons() {
 
 void playSound(int change) {
   if(change == -1) {
-    stopTimer();
+    //stopTimer();
+    stopLETimer();
     disableDAC();
     *DAC0_CH0DATA = 0;
     *DAC0_CH1DATA = 0;

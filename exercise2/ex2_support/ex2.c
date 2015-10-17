@@ -4,6 +4,7 @@
 
 #include "efm32gg.h"
 #include "music_theory.c"
+#include "LETimer.h"
 
 /* 
   TODO calculate the appropriate sample period for the sound wave(s) 
@@ -16,7 +17,8 @@
 
 
 /* Declaration of peripheral setup functions */
-void setupTimer(uint32_t period);
+//void setupTimer(uint32_t period);
+
 void setupDAC();
 void setupNVIC();
 void setupGPIO();
@@ -27,7 +29,8 @@ int main(void)
   /* Call the peripheral setup functions */
   setupGPIO();
   setupDAC();
-  setupTimer(SAMPLE_PERIOD);
+  //setupTimer(SAMPLE_PERIOD);
+  setupLETimer(SAMPLE_PERIOD);
 
   /* Enable interrupt handling */
   setupNVIC();
@@ -36,7 +39,7 @@ int main(void)
   /* TODO for higher energy efficiency, sleep while waiting for interrupts
      instead of infinite loop for busy-waiting
   */
-  *SCR = 0x01;
+  *SCR = 0x06;
   
 
   while(1) {
@@ -57,7 +60,16 @@ void setupNVIC()
   */
 
      
-     *ISER0 = 0x1802;
+     //*ISER0 = 0x1802;
+
+     // GPIO EVEN
+     *ISER0 |= 1 << 1;
+
+     // GPIO ODD
+     *ISER0 |= 1 << 11;
+
+     // LETIMER0
+     *ISER0 |= 1 << 26;
 }
 
 /* if other interrupt handlers are needed, use the following names: 

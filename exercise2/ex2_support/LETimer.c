@@ -1,6 +1,9 @@
 #include <stdint.h>
 #include <stdbool.h>
+
 #include "efm32gg.h"
+#include "music_theory.h"
+#include "LETimer.h"
 
 /* The low energy timer will make use of the low frequency oscillator (LFX0) */
 
@@ -30,7 +33,7 @@ void setupLETimer(uint16_t period) {
 	*LETIMER0_COMP0 = period;
 
 	// Start the LETIMER
-	startLETimer();
+	*LETIMER0_CMD |= (1<<0);
 
 }
 
@@ -39,5 +42,8 @@ void startLETimer() {
 }
 
 void stopLETimer() {
+	i = 0;
+    counter = 0;
+    note_counter = 0;
 	*LETIMER0_CMD |= (1<<1);
 }
