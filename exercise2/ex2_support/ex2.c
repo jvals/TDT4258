@@ -1,7 +1,10 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "efm32gg.h"
+#include "music_theory.c"
+#include "LETimer.h"
 
 /* 
   TODO calculate the appropriate sample period for the sound wave(s) 
@@ -9,13 +12,16 @@
   from) runs at 14 MHz by default. Also remember that the timer counter
   registers are 16 bits.
 */
-/* The period between sound samples, in clock cycles */
-#define   SAMPLE_PERIOD   0
+
+
+
 
 /* Declaration of peripheral setup functions */
-void setupTimer(uint32_t period);
+//void setupTimer(uint32_t period);
+
 void setupDAC();
 void setupNVIC();
+void setupGPIO();
 
 /* Your code will start executing here */
 int main(void) 
@@ -23,17 +29,21 @@ int main(void)
   /* Call the peripheral setup functions */
   setupGPIO();
   setupDAC();
-  setupTimer(SAMPLE_PERIOD);
+  setupLETimer(SAMPLE_PERIOD);
 
-  
-  
   /* Enable interrupt handling */
   setupNVIC();
+
   
   /* TODO for higher energy efficiency, sleep while waiting for interrupts
      instead of infinite loop for busy-waiting
   */
-  while(1);
+  *SCR = 0x06;
+  
+
+  while(1) {
+    __asm("WFI");
+  }
 
   return 0;
 }
@@ -47,8 +57,14 @@ void setupNVIC()
      You will need TIMER1, GPIO odd and GPIO even interrupt handling for this
      assignment.
   */
+     // GPIO EVEN
+     *ISER0 |= 1 << 1;
 
-     *ISER0 = 0x802;
+     // GPIO ODD
+     *ISER0 |= 1 << 11;
+
+     // LETIMER0
+     *ISER0 |= 1 << 26;
 }
 
 /* if other interrupt handlers are needed, use the following names: 

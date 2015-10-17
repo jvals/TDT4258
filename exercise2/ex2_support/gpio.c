@@ -19,9 +19,14 @@ void setupGPIO()
   //Enable GPIO EXTIPSELL
   *GPIO_EXTIPSELL = 0x22222222;
 
+  //Enable EXTIRISE, EXTIFALL and IEN
   *GPIO_EXTIRISE = 0xff;
   *GPIO_EXTIFALL = 0xff;
   *GPIO_IEN = 0xff;
+
+  //Turn off SRAM
+  //*EMU_CTRL = 0x7;
+
     
   /* Example of HW access from C code: turn on joystick LEDs D4-D8
      check efm32gg.h for other useful register definitions
@@ -31,23 +36,7 @@ void setupGPIO()
   *GPIO_PA_MODEH = 0x55555555; /* set pins A8-15 as output */
   *GPIO_PA_DOUT = 0xffff; /* turn on LEDs D4-D8 (LEDs are active low) */
 
-/*
-  
-   int a = 0;
 
-   while(1){
-   		a = 0;
-   		if(*GPIO_PA_DOUT == 0xffff){
-   			*GPIO_PA_DOUT = 0x0000;
-   		}
-
-   		*GPIO_PA_DOUT = 0x2 + *GPIO_PA_DOUT; 
-
-   		while(a<100){
-   			a = a + 1;
-   		}
-   }
-  */ 
 }
 
 
