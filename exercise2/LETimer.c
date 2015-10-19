@@ -19,7 +19,7 @@ void setupLETimer(uint16_t period) {
 	Timeout period of 32768 cycles.
 	Reset is 0x3 for some reason, so we need to 
 	invert */
-	*CMU_CTRL &= ~(3<<18);
+	*CMU_CTRL &= (3<<18);
 
 	/* Enable clock for low energy peripheral interface */
 	*CMU_HFCORECLKEN0 |= 1<<4;
@@ -43,6 +43,7 @@ void setupLETimer(uint16_t period) {
 void startLETimer() {
 	*LETIMER0_CMD |= (1<<0);
 	*CMU_OSCENCMD |= (1<<8);
+	*CMU_LFCLKSEL |= 2<<0;
 }
 
 void stopLETimer() {
@@ -50,6 +51,7 @@ void stopLETimer() {
     counter = 0;
     note_counter = 0;
 	*LETIMER0_CMD |= (1<<1);
+	*CMU_LFCLKSEL = 0;
 	*CMU_OSCENCMD |= (1<<9);
 	*LETIMER0_IFC |= (1 << 2);
 

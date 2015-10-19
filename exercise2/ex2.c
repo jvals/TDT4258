@@ -39,10 +39,10 @@ int main(void)
      instead of infinite loop for busy-waiting
   */
 
-  *CMU_CMD = 4<<0;
+ /* *CMU_CMD = 4<<0;
 
   *CMU_OSCENCMD |= 0<<0;
-  *CMU_OSCENCMD |= 1<<1;
+  *CMU_OSCENCMD |= 1<<1;*/
 
   *SCR = 0x06;
   
