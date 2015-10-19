@@ -22,7 +22,7 @@ extern uint16_t note_counter;
 extern uint16_t i;
 
 
-extern Song LisaWentToSchoolSchool;
+extern Song LisaWentToSchool;
 extern Song MarioAttempt;
 extern Song Winner1;
 extern Song Melody;
