@@ -41,18 +41,18 @@ void setupLETimer(uint16_t period) {
 }
 
 void startLETimer() {
-	*CMU_OSCENCMD |= (1<<8);
-	*CMU_LFCLKSEL |= 2<<0;
-	*LETIMER0_CMD |= (1<<0);
+	*CMU_OSCENCMD |= (1<<8);	// Enable LFXO
+	*CMU_LFCLKSEL |= 2<<0; 		//	Select LFXO as LFACLK
+	*LETIMER0_CMD |= (1<<0);	// Start LETIMER
 }
 
 void stopLETimer() {
 	i = 0;
     counter = 0;
     note_counter = 0;
-	*LETIMER0_CMD |= (1<<1);
-	*CMU_LFCLKSEL = 0;
-	*CMU_OSCENCMD |= (1<<9);
-	*LETIMER0_IFC |= (1 << 2);
+	*LETIMER0_CMD |= (1<<1); 	// Stop the LETIMER
+	*CMU_LFCLKSEL = 0;      	// Disable LFACLK
+	*CMU_OSCENCMD |= (1<<9); 	// Disable LFXO
+	*LETIMER0_IFC |= (1 << 2);	// Clear LETIMER Interrupt flag
 
 }
