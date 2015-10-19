@@ -39,10 +39,10 @@ int main(void)
      instead of infinite loop for busy-waiting
   */
 
- /* *CMU_CMD = 4<<0;
+  *CMU_CMD = 4<<0; //Select LFXO as clock source for the high frequency clock
 
-  *CMU_OSCENCMD |= 0<<0;
-  *CMU_OSCENCMD |= 1<<1;*/
+  *CMU_OSCENCMD |= 0<<0; // Disables the high frequency oscillator
+  *CMU_OSCENCMD |= 1<<1; // Disables the high frequency oscillator
 
   *SCR = 0x06;
   

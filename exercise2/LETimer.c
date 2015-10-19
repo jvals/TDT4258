@@ -41,9 +41,9 @@ void setupLETimer(uint16_t period) {
 }
 
 void startLETimer() {
-	*LETIMER0_CMD |= (1<<0);
 	*CMU_OSCENCMD |= (1<<8);
 	*CMU_LFCLKSEL |= 2<<0;
+	*LETIMER0_CMD |= (1<<0);
 }
 
 void stopLETimer() {
