@@ -4,7 +4,7 @@
 #include "dac.h"
 #include "LETimer.h"
 
-Song* current_song = &TEST;
+Song* current_song = &LisaWentToSchool;
 uint16_t counter = 0;
 uint16_t current_note_length = 0xFFF;
 uint16_t note_counter = 0;
@@ -340,10 +340,25 @@ Note Space = {1, {0}};
 
 
 
-Song TEST = {32, {&C4, &D4, &E4, &F4, &G4,&Space,&G4,&Space,  &A4, &A4, &A4, &A4, &G4, &Space, &Space, &Space, &F4, &F4, &F4, &F4, &E4, &Space, &E4, &Space, &D4, &D4, &D4, &D4, &C4, &Space, &Space, &Space} };
+Song LisaWentToSchool = {32, {&C4, &D4, &E4, &F4, &G4,&Space,&G4,&Space,  &A4, &A4, &A4, &A4, &G4, &Space, &Space, &Space, &F4, &F4, &F4, &F4, &E4, &Space, &E4, &Space, &D4, &D4, &D4, &D4, &C4, &Space, &Space, &Space} };
 
-Song TEST1 = {78, {&E4, &E4, &Space, &E4, &Space, &C4, &E4, &Space, &G4, &Space, &Space, &Space, &G3, &Space, &Space, &Space, &C4, &Space, &Space, &G3, &Space, &Space, &E3, &Space, &Space, &A4, &Space, &B4, &Space, &AS4, &A4, &Space, &G3, &E4, &G4, &A5, &Space, &F4, &G4, &Space, &E4, &Space, &C4, &D4, &B4, &Space, &Space, &C4, &Space, &Space, &G3, &Space, &Space, &E3, &Space, &Space, &A4, &Space, &B4, &Space, &AS4, &A4, &Space, &G3, &E4, &G4, &A5, &Space, &F4, &G4, &Space, &E4, &Space, &C4, &D4, &B4, &Space, &Space}};
+Song MarioAttempt = {47, {&E4, &E4, &Space, &E4, &Space, &C4, &E4, &Space, &G4, &Space, &Space, &Space, &G3, &Space, &Space, &Space, &C4, &Space, &Space, &G3, &Space, &Space, &E3, &Space, &Space, &A4, &Space, &B4, &Space, &AS4, &A4, &Space, &G3, &E4, &G4, &A5, &Space, &F4, &G4, &Space, &E4, &Space, &C4, &D4, &B4, &Space, &Space, /*&C4, &Space, &Space, &G3, &Space, &Space, &E3, &Space, &Space, &A4, &Space, &B4, &Space, &AS4, &A4, &Space, &G3, &E4, &G4, &A5, &Space, &F4, &G4, &Space, &E4, &Space, &C4, &D4, &B4, &Space, &Space*/}};
 
-Song TEST2 = {8,{&E4, &F4, &G4, &A4, &Space, &E4, &C5, &Space}};
+Song Winner1 = {8,{&E4, &F4, &G4, &A4, &Space, &E4, &C5, &Space}};
+
+//Song TEST3 = {5, &C4, &D4, &B4, &Space, &Space};
+
+//Song TEST3 = {31, &C4, &Space, &Space, &G3, &Space, &Space, &E3, &Space, &Space, &A4, &Space, &B4, &Space, &AS4, &A4, &Space, &G3, &E4, &G4, &A5, &Space, &F4, &G4, &Space, &E4, &Space, &C4, &D4, &B4, &Space, &Space};
+
+Song WellDone = {7,{&C4, &C5, &A3, &A4, &A3, &AS4, &Space}};
+
+Song Winner2 = {15,{&G2, &B2, &D3, &G3, &B3, &GS2, &C3, &DS3, &GS3, &C4, &AS2, &D3, &F3, &AS3, &D4}};
+
+Song Melody = {32,{&F3, &F3, &F3, &D3, &Space, &F3, &Space, &Space, &Space, &F3, &D3, &F3, &Space, &D3, &Space, &F3, &E3,&E3,&E3, &C3,&Space,&E3, &Space,
+		&Space, &Space, &E3, &C3, &Space, &E3, &Space,&C3, &Space, &Space, &Space}};
+		
+//Song TEST6 = { 13, {&D5, &C5, &B4, &A4, &G4, &F4, &E4, &D4, &C4, &B3, &A3, &G3, &F3} };		
+
+Song Loser = {7,{&Bb3, &A3, &Ab3, &G3, &Ab3, &G3, &G3}};
 
  

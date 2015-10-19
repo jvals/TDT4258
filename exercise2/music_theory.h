@@ -21,11 +21,11 @@ extern uint16_t counter;
 extern uint16_t note_counter;
 extern uint16_t i;
 
-extern Note A3;
-extern Note A32;
-extern Note A4;
-extern Song TEST;
-extern Song TEST1;
-extern Song TEST2;
-extern Song TEST3;
-extern Song TEST4;
+
+extern Song LisaWentToSchoolSchool;
+extern Song MarioAttempt;
+extern Song Winner1;
+extern Song Melody;
+extern Song Winner2;
+extern Song WellDone;
+extern Song Loser;
