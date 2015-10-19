@@ -10,20 +10,23 @@ uint16_t current_note_length = 0xFFF;
 uint16_t note_counter = 0;
 uint16_t i = 0;
 
+// setcurrentsong sets the current song
 void setCurrentSong(Song* song, uint16_t note_length) {
 	current_song = song;
 	current_note_length = note_length;
 }
 
+// setdacdata puts the current element of the song buffer onto the dac data channels
 void setDACDATA(Note* n, int offset) {
 	*DAC0_CH0DATA = (*n).buffer[offset];
 	*DAC0_CH1DATA = (*n).buffer[offset];
 }
 
+// Playsong sets the current song and starts the timer and the dac
 void playSong(Song* song, uint16_t note_length) {
 	setCurrentSong(song, note_length);
-	setupDAC();
 	startLETimer();
+	setupDAC();
 }
 
 
