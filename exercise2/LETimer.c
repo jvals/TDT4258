@@ -19,7 +19,7 @@ void setupLETimer(uint16_t period) {
 	Timeout period of 32768 cycles.
 	Reset is 0x3 for some reason, so we need to 
 	invert */
-	*CMU_CTRL &= (3<<18);
+	*CMU_CTRL &= ~(3<<18);
 
 	/* Enable clock for low energy peripheral interface */
 	*CMU_HFCORECLKEN0 |= 1<<4;
