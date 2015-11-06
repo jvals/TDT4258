@@ -100,7 +100,7 @@ tramp
 .cask/
 
 
-*.zip
+
 *.swp
 *.swo
 *.un~
