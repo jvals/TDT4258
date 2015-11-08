@@ -133,9 +133,18 @@ static int __init gamepad_init(void) {
     );
 
   /* Enable interrupts */
-  iowrite32(0xFF, GPIO_EXTIFALL);
-  iowrite32(0xFF, GPIO_IEN);
-  iowrite32(0xFF, GPIO_IFC);
+  iowrite32(
+    0xff, 
+    ioremap_nocache(GPIO_EXTIFALL, size)
+    );
+  iowrite32(
+    0xff,
+    ioremap_nocache(GPIO_IEN, size)
+    );
+  iowrite32(
+    0xff,
+    ioremap_nocache(GPIO_IFC, size)
+    );
 
   /*
   Initializes cdev, remembering fops, making it ready to add to
